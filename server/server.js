@@ -7,6 +7,6 @@ var app = express();
 
 app.use(express.static(publicPath));
 
-app.isten(port, () => {
+app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-})
+});
