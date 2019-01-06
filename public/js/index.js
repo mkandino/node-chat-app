@@ -1,4 +1,5 @@
 var socket = io();
+var $ = jQuery;
 
 socket.on('connect', function () {
     console.log("Connected to server");
@@ -9,5 +10,22 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', (message) => {
-        console.log("newMessage", message);
+    console.log("newMessage", message);
+
+    var li = $('<li></li>');
+    li.text(`${message.from}: ${message.text}`);
+
+    $('#messages').append(li);
 })
+
+jQuery('#message-form').on('submit', function (e) {
+    e.preventDefault();
+
+    socket.emit('createMessage', {
+        from: "User",
+        text: $('[name=message]').val()
+    }, function() {
+        
+    })
+    
+});
